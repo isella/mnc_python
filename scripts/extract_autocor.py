@@ -85,7 +85,7 @@ def extract_selfcorr(path: str, date: str, time: str, step: int, workingdir: str
     #print('s_hh::',s_hh)
 
     # ------------------------------
-    # Extract autocorrlations
+    # Extract autocorrelations
     
     workdir = workingdir+date+'/'
     os.makedirs(workdir, exist_ok=True)
@@ -113,8 +113,12 @@ def extract_selfcorr(path: str, date: str, time: str, step: int, workingdir: str
             timestamps = glob.glob(s_time)
             timestamps = sorted([row[-24:-9] for row in timestamps])
             timestamps = timestamps[0::step]
-            #print('timestamps:',timestamps)        
-
+            #print('timestamps:',timestamps)
+        
+        if (timestamps.size == 0):
+            print(f"> Warning: {p_hh[0][k]} is empty")
+            break
+        
         # We now work on each timestamp
         for i, timestamp in enumerate(timestamps):        
         
